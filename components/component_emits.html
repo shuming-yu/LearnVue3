@@ -12,13 +12,13 @@
   </ul>
   {{ num }}
   <button-counter
-
+  @emit-num="addNum"
   ></button-counter>
 
   <h3>傳遞資料狀態</h3>
   內部傳來的文字：{{ text }}<br>
   <button-text
-
+  @emit-text="getData"
   ></button-text>
 
   <h3>命名注意</h3>
@@ -39,22 +39,25 @@
       };
     },
     methods: {
-      // addNum() {
-      //   console.log('addNum');
-      //   this.num++
-      // },
-      // getData(text) {
-      //   console.log('getData', text);
-      //   this.text = text;
-      // }
+      addNum(){
+        console.log('addNum');
+        this.num++;
+      },
+      getData(text){
+        console.log('getData');
+        this.text = text;
+      },
     }
   });
 
   app.component('button-counter', {
     methods: {
-
+      click(){
+        console.log('click');
+        this.$emit('emit-num');
+      },
     },
-    template: `<button type="button">add</button>`
+    template: `<button type="button" @click='click'>add</button>`
   });
 
   app.component('button-text', {
@@ -64,8 +67,12 @@
       }
     },
     methods: {
+      callout(){
+        console.log('callout');
+        this.$emit('emit-text', this.text);
+      },
     },
-    template: `<button type="button">emit data</button>`
+    template: `<button type="button" @click='callout'>emit data</button>`
   });
 
   app.component('button-named', {

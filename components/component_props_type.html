@@ -6,10 +6,13 @@
 <div id="app">
   <h3>Props 型別技巧</h3>
   <input type="number" v-model="money">
-
+  
+  <!-- 無使用v-bind時, 一律為字串呈現 -->
   <props-type money="300"></props-type>
-  <props-type :money="money"></props-type>
 
+
+  <props-type :money="boo"></props-type>
+  <props-type :money={}></props-type>
 
   <h3>定義 Props 型別驗證</h3>
   <p>實戰中不太會用到全部技巧，常用的有：</p>
@@ -20,9 +23,10 @@
   <props-validation
   :prop-a="fun"
   prop-c="required"
-  :prop-f="10000"
+  :prop-f="50000"
   >
   </props-validation>
+  
 </div>
 
 <script type="module">
