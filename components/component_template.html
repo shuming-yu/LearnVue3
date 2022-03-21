@@ -30,6 +30,7 @@
   <h4>使用 v-is 綁定</h4>
 <!--  <div v-is="'alert'"></div>-->
   <div v-is=" 'alert' "></div>
+  <!-- v-is做動態屬性使用,可插入變數, 因此轉為字串使用 -->
   <h4>動態屬性</h4>
  <input type="text" v-model="componentName">
 
@@ -48,7 +49,7 @@
       </tr>
     </thead>
     <tbody>
-      <!-- <table-row></table-row> -->
+      <!-- <table-row></table-row> -->      <!-- html結構限制 -->
       <tr v-is=" 'table-row' "></tr>
     </tbody>
   </table>
