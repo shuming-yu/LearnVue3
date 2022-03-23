@@ -11,8 +11,7 @@
       我想取出元件的值來使用
       <!-- {{ slotProps }} -->
       {{ slotProps.product.name }}
-
-      <!-- slotProps 可帶出多個值 -->
+      <!-- slotProps 可帶出多個值, 如下舉例 -->
     </template>
   </card>
   <hr>
@@ -21,9 +20,9 @@
   <card2 :product="product">
     <template #header>
       買早餐
-    </template>外層變數可給予預設值
+    </template>
     <template #default="{ product, veganName='是素非素' }">
-      <!-- 外層變數可給予預設值  -->
+      <!-- 外層變數可給予預設值 ex. veganName='是素非素'  -->
       {{ product.name }} /
       {{ veganName }}
     </template>
