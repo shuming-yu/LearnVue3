@@ -6,6 +6,9 @@
 <div id="app">
 
   <h3>watch 監聽單一變數</h3>
+
+  <div>watch不會產生新的值, 主要修改data裡面內容, 當data有變化時重新渲染至畫面上</div>
+
   <label for="name">名字須超過十個字</label>
   <input type="text" id="name" v-model="tempName">
   <P>result: {{ result }}</P>

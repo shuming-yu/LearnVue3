@@ -57,6 +57,10 @@
   <ul>
     <list-item :item="item" v-for="(item, key) in products" :key="item.name + 2"></list-item>
   </ul>
+
+  <div>:key=" 'ice' + key " 的 ice 是字串，key 則是代表 v-for="(ice, key) in iceType" 的 key（索引值），因此會是 ice0、ice1、ice2…等等</div>
+  <div>:key=" 'ice' + 'key' " 則是兩者都是字串，字串相加後會是 icekey</div>
+  <div>:key=" ice + key " ice 代表 v-for="(ice, key) in iceType" 的 ice 參數，key 是索引值，因此可以看 v-for 帶入的 ice 分別是什麼，以作業來說會是：正常冰0、少冰1、微冰2、去冰3、熱4</div>
 </div>
 
 <script>

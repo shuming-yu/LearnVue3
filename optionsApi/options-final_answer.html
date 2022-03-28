@@ -57,7 +57,7 @@
     methods: {
       getData() {
         const apiUrl = 'https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json';
-
+        
         axios.get(apiUrl).then((res) => {
           this.datastore = res.data.result.records;
         })
