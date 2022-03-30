@@ -10,26 +10,34 @@
     <li>內層元件補上 inject</li>
   </ul>
   <card></card>
-
+  {{ user.name }}
   <h3>注意事項：響應式</h3>
 
+  <br>
+
+  <h4>筆記補充</h4>
+  <ul>
+    <li>透過props需要一層一層往內傳,provide可處理多層資料處理,可將最外層資料傳到內層指定元件上</li>
+    <li>適用於登入驗證上</li>
+  </ul>
 </div>
 
 <script>
-const userComponent = {
+const userComponent = { //最內層
   template: `<div>
     {{ user.name }}
     {{ user.uuid }}
   </div>`,
+  inject: ['user'], //對應最外層 provide 物件名稱
   created() {
     console.log(this.user);
 
     // 如果根元件沒有使用 function return 則不能使用響應式
-    // this.user.name = '杰倫'
+    this.user.name = '杰倫'
   }
 }
 
-const app = Vue.createApp({
+const app = Vue.createApp({ //最外層
   data() {
     return {
       user: {
@@ -38,9 +46,20 @@ const app = Vue.createApp({
       }
     }
   },
+  // provide: {  //物件結構
+  //   user: {
+  //       name: '小明',
+  //       uuid: 78163
+  //     },
+  // },
+  provide() { //函式結構, 產生響應式 (建議都使用方式)
+    return {
+      user : this.user,
+    }
+  }
 })
 
-  app.component('card', {
+  app.component('card', { //中間層
     data() {
       return {
         title: '文件標題',
@@ -51,13 +70,16 @@ const app = Vue.createApp({
     components: {
       userComponent
     },
+    inject: ['user'], //要先加入inject取得最外層物件名稱,才能取值
     template: `
       <div class="card" style="width: 18rem;">
         <div class="card-body">
+          {{ user.name }} 
           <userComponent></userComponent>
         </div>
       </div>
     `,
+    //測試中間層取得資訊 {{ user.name }}
   });
 
 

@@ -14,7 +14,7 @@
   <card2></card2>
 
   <h3>實用技巧（取代標題、多個）</h3>
-<!--  <new-title></new-title>-->
+ <new-title></new-title>
 </div>
 
 <script>
@@ -38,15 +38,20 @@ const app = Vue.createApp({
         </div>
       </div>
 
+      <teleport to="#target">
       <div v-if="toggle" class="alert alert-danger">被招喚的元素</div>
+      </teleport>
     `,
     props: ['item']
   });
 
   app.component('card2', {
     template: `
+    <teleport to=".col-md-3">
       <div class="alert alert-danger">被招喚的元素</div>
+    </teleport>
     `
+    //F12查看錯誤, 只運行到左方區塊, 沒辦法生成
   })
 
   app.component('new-title', {

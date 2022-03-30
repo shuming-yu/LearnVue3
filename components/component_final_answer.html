@@ -3,7 +3,8 @@
     <!-- 章節標題 --><div class="mb-4"><h1 class="mt-0 text-muted">元件章節作業</h1><small>檔名：<code>component_final.html</code></small></div>
     <!-- 🔥🔥練習開始🔥🔥 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <div id="app">
+    <script src="https://unpkg.com/vue@next"></script>
+      <div id="app">
       <h3>作業條件：</h3>
       <ol>
         <li>將以下範例改為 Vue 的版本</li>
@@ -34,31 +35,54 @@
     <script>
       const app = {
         data(){
-          return{
+          return {
             datastore: [],
-          }
+          };
         },
+
         methods: {
           getData(){
             const jsonUrl = 'https://api.kcg.gov.tw/api/service/Get/9c8e1450-e833-499c-8320-29b36b7ace5c';
             axios.get(jsonUrl)
             .then( (res) => {
-              //console.log(res.data.data.XML_Head.Infos.Info);
+              console.log(res.data.data.XML_Head.Infos.Info);
               this.datastore = res.data.data.XML_Head.Infos.Info;
             })
             .catch( (err) => {
               console.log(err);
-            });
+            })
           },
 
         },
+
         created(){
           this.getData();
-        }
-
+        },
       };
 
-
+      app.component('card',{
+        props: ['item'],
+        template:`
+        <div class="col-md-6 py-2">
+          <div class="card">
+            <div class="card bg-dark text-white text-left">
+              <img class="card-img-top img-cover" height="155px" :src="item.Picture1">
+              <div class="card-img-overlay d-flex justify-content-between align-items-end p-0 px-3" style="background-color: rgba(0, 0, 0, .2)">
+                <h5 class="card-img-title-lg">{{item.Name}}</h5>
+                <h5 class="card-img-title-sm">{{item.Zone}}</h5>
+              </div>
+            </div>
+            <div class="card-body text-left">
+                <p class="card-text"><i class="far fa-clock fa-clock-time"></i>&nbsp;{{item.Opentime}}</p>
+                <p class="card-text"><i class="fas fa-map-marker-alt fa-map-gps"></i>&nbsp;{{item.Add}}</p>
+                <p class="card-text"><i class="fas fa-mobile-alt fa-mobile"></i>&nbsp;{{item.Tel}}</p>
+              <div v-if=item.Ticketinfo> 
+                <p class="card-text"><i class="fas fa-tags text-warning"></i>&nbsp;{{item.Ticketinfo}}</p>
+              </div>
+            </div>
+          </div>
+        </div>`,
+      })
       Vue.createApp(app).mount('#app');
     </script>
 
