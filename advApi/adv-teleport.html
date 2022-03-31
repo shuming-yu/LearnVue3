@@ -55,8 +55,10 @@ const app = Vue.createApp({
   })
 
   app.component('new-title', {
-    template: `<teleport to="title"> - 新增的標題片段</teleport>
-    <teleport to="h1"> - 新增的文字片段</teleport>`
+    template: `
+    <teleport to="title"> - 新增的標題片段</teleport>
+    <teleport to="h1"> - 新增的文字片段</teleport>
+    `
   })
 
   app.mount('#app');

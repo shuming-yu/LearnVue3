@@ -28,7 +28,7 @@ const userComponent = { //最內層
     {{ user.name }}
     {{ user.uuid }}
   </div>`,
-  inject: ['user'], //對應最外層 provide 物件名稱
+  inject: ['user'], //對應最外層 provide 的 key 名稱
   created() {
     console.log(this.user);
 
@@ -52,7 +52,7 @@ const app = Vue.createApp({ //最外層
   //       uuid: 78163
   //     },
   // },
-  provide() { //函式結構, 產生響應式 (建議都使用方式)
+  provide() { //函式結構, 產生響應式 (建議使用此方式)
     return {
       user : this.user,
     }

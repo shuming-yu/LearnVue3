@@ -41,9 +41,15 @@ const mixComponent2 = {
 const app = Vue.createApp({});
 
 app.component('card', {
+  data(){ // 元件本身優先順序最高
+    return {
+      name: 'card'
+    }
+  },
   template: `<div class="card">
     <div class="card-body">{{ name }}</div>
   </div>`,
+  mixins: [mixComponent1, mixComponent2], // 以最後的元件為主
   created() {
     console.log('card 的元件生命週期')
   }
