@@ -7,17 +7,36 @@
   <button type="button" @click="add">累加</button>
 </div>
 <script type="module">
+// import { createApp } from Vue;  // Vue Cli, ESM
 
-const app = Vue.createApp({
-  data() {
-    return {
-      num: 1,
+// ref 方法
+const { createApp, ref } = Vue;
+
+const app = createApp({
+  // data() {
+  //   return {
+  //     num: 1,
+  //   }
+  // },
+  // methods: {
+  //   add() {
+  //     this.num++;
+  //   }
+  // },
+  setup() {
+    const num = ref(1);
+    
+    // Composition API 不會使用 this
+    function add() {
+      num.value++;
     }
-  },
-  methods: {
-    add() {
-      this.num++;
+
+    // 資料&方法，都需要 return
+    return{
+      num,
+      add,
     }
+
   },
 });
 

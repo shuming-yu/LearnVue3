@@ -8,17 +8,40 @@
   <li>Proxy 的運作</li>
 </ul>
 <script type="module">
+
+const render = (prop, data) =>{
+  const target = document.querySelector('#app');
+  target.innerHTML = `${ prop }: ${ data }`;
+}
+// render('Name', 'Ben');
+
 // #1 Proxy 結構
 // // 控制器，關鍵知識點：監聽
-// const handler = {
-//   get(obj, prop, value) {
-//     console.log('get:', obj, prop, value);
-//   },
-//   set(obj, prop, newVal) {
-//     console.log('set:', obj, prop, newVal);
-//   }
-// };
+const handler = {
+  get(obj, prop, value) {
+    console.log('get:', obj, prop, value);
+    // return 'Ben';
+    return obj[prop];
+  },
+  set(obj, prop, newVal) {
+    console.log('set:', obj, prop, newVal);
+    obj[prop] = newVal;
+    render(prop, obj[prop]);
+    return true;  // 操作完畢 (消除錯誤)
+  }
+};
 
+// 前面是一個"物件"，後面是控制器
+const newObj = new Proxy({ a: 1 }, handler);
+
+newObj.a = 2;
+
+console.log(newObj);
+console.log(newObj.a);  // get return...
+
+setTimeout(() => {  // 兩秒後將新增資料重新渲染至畫面
+  newObj.a = 'Benjamin';
+}, 2000);
 
 </script>
 <!-- 🙇🙇練習結束🙇🙇 -->

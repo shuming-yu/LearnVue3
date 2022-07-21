@@ -5,14 +5,35 @@
 
 <div id="app">
   {{person}}
+  <input type="text" v-model="person.name">
 </div>
 <script type="module">
 // import { createApp } from '...';
-const { createApp } = Vue;
+
+// reactive 是 proxy 標準物件
+const { createApp, reactive } = Vue;
 
 const app = createApp({
+
   setup() {
+    // 一定是物件
+    // 套用 reactive 特性，雙向綁定
+    // 盡可能使用 const 定義 reactive 物件
+    const person = reactive({
+      name: 'Ben',
+    });
     
+    person.name = 'Tiffany';
+    
+    // 如使用 let 就會失去 proxy 雙向綁定特性
+    // person = {
+    //   name: 'Tommy',
+    // }
+    // console.log(person);
+
+    return {
+      person,
+    }
   },
 });
 
