@@ -4,20 +4,34 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  
+  <img src="/composition/ref&reactive.PNG" alt="">
 </div>
 <script type="module">
 const { createApp, reactive, ref } = Vue;
 
 const app = createApp({
   setup() {
+    // 請都使用 const
     const person = ref({
       name: '卡斯伯'
     });
     const person2 = reactive({
       name: '卡斯伯',
     });
-    
+
+    // ref 可以用在純值
+    // ref 比較好用, 且不會出錯的方法
+    console.log('person', person);
+    // 物件, Handler
+    console.log('person2', person2);
+
+    // AJAX
+    // 使用 let person 測試, F12查看呈現 非Proxy物件, 失去雙向綁定特性
+    // const data = {
+    //   name: 'Benjamin',
+    // }
+    // person2 = data;
+    // console.log(person2);
 
     return {
 

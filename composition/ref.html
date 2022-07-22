@@ -4,16 +4,39 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  {{person}}
-  <input type="text" v-model="num">
+  {{person}}<input type="text" v-model="person.name">
+  <br>
+  <input type="text" v-model="num"> {{ num }}
 </div>
 <script type="module">
 // import { createApp } from '...';
-const { createApp } = Vue;
+const { createApp, ref } = Vue;
 
 const app = createApp({
   setup() {
-    
+    // ref 可以用在純值
+    const num = ref(1);
+    num.value = 5;
+
+    const person = ref({
+      name: 'Ben',
+      family:{
+        home: 'Ben家',
+      }
+    })
+    // person.value.name = 'Nicky';
+    // person.value.family.home = 'Nicky家';
+    person.value = {
+      name: 'Nicky',
+      family:{
+        home: 'Nicky家',
+      }
+    }
+
+    return {
+      num,
+      person,
+    }
   },
 });
 
