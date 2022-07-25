@@ -4,7 +4,7 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  <card ></card>
+  <card @push-data="getData"></card>
 </div>
 <script type="module">
 const { createApp, ref } = Vue;
@@ -16,9 +16,13 @@ const card = {
       @click="pushData">送出資料</button>
     </div>
   </div>`,
-  setup(props) {
+  setup(props, { emit }) {
+    // console.log(context); // F12 check context 包含 attrs, emti, slots
+    console.log(emit); // 方法
+    
     function pushData() {
-      console.log('pushData');
+      // console.log('pushData');
+      emit('push-data', '由內向外傳遞的資料');
     }
 
     return {
@@ -37,9 +41,13 @@ const app = createApp({
       name: '卡斯伯'
     });
 
+    function getData(data) {
+      console.log('外層的 getData 觸發事件,', data);
+    }
+
     return {
       person,
-      
+      getData,
     }
   },
 });
