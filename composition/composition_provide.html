@@ -9,31 +9,44 @@
 </div>
 <script type="module">
 // import { createApp } from '...';
-const { createApp, ref } = Vue;
+const { createApp, ref, provide, inject } = Vue;
 
+// 內層元件
 const card = {
   template: `<div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title"></h5>
-      <input type="text">
+      <h5 class="card-title">
+        {{ person.name }}
+      </h5>
+      <input type="text" v-model="person.name">
     </div>
   </div>`,
   setup(props) {
 
+    const person = inject('personData');  // 接收
+
     return {
+      person,
     }
   }
 }
 
+// 外層元件
 const app = createApp({
   components: {
     card,
   },
   setup(props) {
-    const person = {
+    // const person = {
+    //   name: '卡斯伯'
+    // };
+    // 並非所有值都一定使用雙向綁定方式定義, 有些值定義一般物件&變數即可(自行判斷)
+    const person = ref({  // ref 定義, 產生雙向綁定
       name: '卡斯伯'
-    };
+    });
 
+          // 自定義名稱, 發送的資料內容
+    provide('personData', person);  // 發送
 
     return {
       person,
