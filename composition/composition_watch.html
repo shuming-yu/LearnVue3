@@ -12,7 +12,7 @@
 
 </div>
 <script type="module">
-const { createApp, ref, reactive } = Vue;
+const { createApp, ref, reactive, watch } = Vue;
 
 const app = createApp({
 
@@ -22,7 +22,11 @@ const app = createApp({
     const productName = ref('蛋餅');
     const watchText = ref('');
 
-
+    // Watch 是等觸發變更後才會執行
+    // watch(productName, (newValue, oldValue) =>{
+    //   // console.log(newValue, oldValue);
+    //   watchText.value = `輸入的文字僅有 ${newValue.length} 個字，上一次有 ${oldValue.length} 個字`;
+    // })
 
     // 監聽物件
     // # ref, reactive 在此運作相同
@@ -36,7 +40,36 @@ const app = createApp({
     });
     const watchText2 = ref('');
 
+    // ref 方式
+    // 監聽深層內容, 需補上 () =>
+    // watch(() => product.value.other.name, (newValue, oldValue) =>{
+    //   // console.log(newValue, oldValue);
+    //   watchText2.value = `輸入的文字僅有 ${newValue.length} 個字，上一次有 ${oldValue.length} 個字`;
+    // })
 
+    // reactive 方式, 省去 .value
+    // watch(() => product.other.name, (newValue, oldValue) =>{
+    //   // console.log(newValue, oldValue);
+    //   watchText2.value = `輸入的文字僅有 ${newValue.length} 個字，上一次有 ${oldValue.length} 個字`;
+    // })
+    
+    // 深層監聽
+    // watch(product, (newValue, oldValue) =>{
+    //   console.log(newValue, oldValue);
+    //   console.log(newValue === oldValue); // 同一物件, 使用其中之一即可
+    // }, { deep: true })
+
+    // 多值監聽
+    watch([productName, product], ([productNameVal, productVal],[productNamePre, productPre]) =>{
+      console.log('純值',
+        'productNameVal:', productNameVal,
+        'productNamePre:', productNamePre,
+      );
+      console.log('物件',
+        'productVal:', productVal,  // 傳參考型式, 結果一致
+        'productPre:', productPre,
+      );
+    }, { deep: true })
 
     return {
       product,
