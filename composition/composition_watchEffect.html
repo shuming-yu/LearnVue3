@@ -4,6 +4,14 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
+  <h3>Watch & watchEffect 差異</h3>
+  <ul>
+    <li>Watch 監聽特定變數</li>
+    <li>Watch 回應前一個修改值</li>
+    <li>watchEffect 使用上比較隨性</li>
+    <li>watchEffect 可以被停止</li>
+  </ul>
+
   {{ watchText }}
   <input type="text" v-model="productName">
   <br>
@@ -17,8 +25,9 @@ const app = createApp({
 
   setup(props) {
     let count = 0;  // 計數器
+    // 純值
     const productName = ref('蛋餅');
-
+    // 物件
     const product = ref({
       name: '蛋餅',
       price: 30,
@@ -42,12 +51,6 @@ const app = createApp({
         stopwatchEffict();  // 被更新10次時即停止
       }
     })
-
-    // Watch, watchEffect
-    // Watch 監聽特定變數
-    // Watch 回應前一個修改值
-    // watchEffect 使用上比較隨性
-    // watchEffect 可以被停止
 
     return {
       product,

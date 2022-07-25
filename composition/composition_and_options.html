@@ -4,11 +4,18 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  <a href="https://v3.cn.vuejs.org/api/composition-api.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90">生命週期</a>
+  <ul>
+    <li>OptionsApi 只有一個生命週期</li>
+    <li>CompositionApi -> Setup 無限制 <a href="https://v3.cn.vuejs.org/api/composition-api.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90">生命週期</a>
+        (可把相同 資料邏輯,生命週期 整合一起)
+    </li>
+  </ul>
+  
   <br>
   {{ person }}
   num:{{ num }}
   <button type="button" @click="add(10)">累加</button>
+  <br>
   newValue: {{ newValue }}
   num2: {{ num2 }}
 </div>
@@ -17,9 +24,6 @@
 const { createApp, ref, onMounted, computed} = Vue;
 
 const app = createApp({
-
-  // optionsApi 只有一個生命週期
-  // compositionApi -> setup 無限制 生命週期 (可把相同 資料邏輯,生命週期 整合一起)
 
   setup() {
     // const num = ref(1);
