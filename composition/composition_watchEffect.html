@@ -11,11 +11,12 @@
 
 </div>
 <script type="module">
-const { createApp, ref, reactive } = Vue;
+const { createApp, ref, reactive, watchEffect } = Vue;
 
 const app = createApp({
 
   setup(props) {
+    let count = 0;  // 計數器
     const productName = ref('蛋餅');
 
     const product = ref({
@@ -29,11 +30,30 @@ const app = createApp({
 
     const watchText = ref('');
 
+    // watchEffect 預設先執行一次
+    const stopwatchEffict = watchEffect(() =>{
+      // console.log('1', productName.value);
+      // console.log('2', product.value.name);
+      watchText.value = `嬤嬤買了 ${ product.value.name }`;
+      count++;
+      console.log(count);
+
+      if(count === 10){
+        stopwatchEffict();  // 被更新10次時即停止
+      }
+    })
+
+    // Watch, watchEffect
+    // Watch 監聽特定變數
+    // Watch 回應前一個修改值
+    // watchEffect 使用上比較隨性
+    // watchEffect 可以被停止
 
     return {
       product,
       productName,
       watchText,
+      watchEffect,
     }
   },
 });
