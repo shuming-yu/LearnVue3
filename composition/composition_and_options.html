@@ -15,6 +15,10 @@
 const { createApp, ref, onMounted, computed} = Vue;
 
 const app = createApp({
+
+  // optionsApi 只有一個生命週期
+  // compositionApi -> setup 無限制 生命週期 (可把相同 資料邏輯,生命週期 整合一起)
+
   setup() {
     // const num = ref(1);
     // const person = ref({

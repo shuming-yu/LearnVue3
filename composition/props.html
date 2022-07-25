@@ -4,7 +4,7 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  <card></card>
+  <card :item="person" num="0829"></card>
 </div>
 <script type="module">
 // import { createApp } from '...';
@@ -13,11 +13,33 @@ const { createApp, ref, toRef } = Vue;
 const card = {
   template: `<div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title"></h5>
+      <h5 class="card-title">
+        {{ item.name }}
+      </h5>
+      {{ num }}
+      <br>
+      {{ name }} <input type="text" v-model="name">
     </div>
   </div>`,
-  setup() {
 
+  props:['item', 'num'],
+
+  setup(props) {
+    console.log(props);
+
+    // 第一層維持 proxy 結構(雙向綁定特性)
+    const { item, num } = props;
+    // console.log(item, num);
+
+    // 第二層(內層)
+    // const { name } = item;  // proxy 物件只到 item 結構上, 失去雙向綁定特性
+    const name = ref(item.name); // 使用 ref 方式定義, 雙向綁定特性
+
+    return {
+      item,
+      num,
+      name,
+    }
   }
 }
 
