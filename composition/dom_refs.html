@@ -4,10 +4,13 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  <a href="https://v3.cn.vuejs.org/api/composition-api.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90">生命週期</a>
+
+  <a href="https://cn.vuejs.org/api/composition-api-lifecycle.html#onmounted">組合式API：生命週期鉤子 -> onMounted()</a>
   <br>
+
   <button type="button" ref="btn">這裡有一個按鈕</button>
   <card ref="card"></card>
+
 </div>
 <script type="module">
 const { createApp, ref, onMounted } = Vue;
@@ -38,8 +41,8 @@ const app = createApp({
       name: '卡斯伯'
     });
 
-    const btn = ref(null);  // 對應 ref="btn", 使用 ref 定義資料 輸入 null 即可
-    const card = ref(null); // // 對應 ref="card", 使用 ref 定義資料 輸入 null 即可
+    const btn = ref(null);  // btn 對應 ref="btn", 使用 ref 定義資料 輸入 null 即可
+    const card = ref(null); // // card 對應 ref="card", 使用 ref 定義資料 輸入 null 即可
     console.log(btn.value, card.value);
 
     onMounted(() =>{  // onMounted 生命週期取的 DOM 元素

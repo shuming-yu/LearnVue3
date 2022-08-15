@@ -4,8 +4,12 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <div id="app">
-  <a href="https://v3.cn.vuejs.org/api/composition-api.html#setup">組合式 API 參考 context</a>
+  <a href="https://cn.vuejs.org/api/composition-api-setup.html">1. 組合式 API 參考 context</a>
+  <br>
+  <a href="https://cn.vuejs.org/api/composition-api-setup.html#setup-context">2. Setup 上下文 : attrs, slots, emit</a>
+
   <card @push-data="getData"></card>
+
 </div>
 <script type="module">
 const { createApp, ref } = Vue;
@@ -17,7 +21,8 @@ const card = {
       @click="pushData">送出資料</button>
     </div>
   </div>`,
-  setup(props, { emit }) {
+  setup(props, { attrs, slots, emit }) {
+    // setup(props, context) 查看 context 內容
     // console.log(context); // F12 check context 包含 attrs, emti, slots
     console.log(emit); // 方法
     
