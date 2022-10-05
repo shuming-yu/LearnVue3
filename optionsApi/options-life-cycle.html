@@ -14,12 +14,18 @@
   <keep-alive>
     <child v-if="isShowing"></child>
   </keep-alive>
+  <!-- <child v-show="isShowing"></child> -->
   <p>講解事項：</p>
   <ul>
     <li>Vue 都是元件，元件的生命週期</li>
     <li>生命週期流程</li>
     <li>v-if 與 v-show 的差異</li>
+    <li>F12 - Elements / Console 檢視</li>
+    <li>v-if - 會直接切換元件生命週期,完整的資料狀態. 當再次按下顯示元件按鈕,會完整移除元件,重新觸發生命週期,資料狀態會重新建立. (資料重製)</li>
+    <li>v-show - 會直接進入生命週期,不會理會 isShowing 資料狀態. 當再次按下顯示元件按鈕,只會改變style,並不會將元件完整移除. (style="display:none")</li>
     <li>使用 Keep Alive 維持生命週期</li>
+    <li>Keep Alive - 觸發 activated 生命週期,後續按下隱藏元件按鈕,會觸發 deactivated 生命週期.</li>
+    <li>當重啟按下顯示元件按鈕,會重新觸發 activated 生命週期,資料狀態會維持住</li>
   </ul>
 
 </div>
