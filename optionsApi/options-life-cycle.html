@@ -5,7 +5,7 @@
 <div id="app">
 
   <h3>Vue 元件生命週期展示</h3>
-  <p>生命週期介紹：<a href="https://vue3js.cn/docs/zh/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA">生命週期</a></p>
+  <p>生命週期介紹：<a href="https://v2.cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA">生命週期</a></p>
   <button @click="isShowing = !isShowing" class="btn btn-primary">
     <span v-if="isShowing">隱藏元件</span>
     <span v-else>顯示元件</span>
@@ -15,6 +15,19 @@
     <child v-if="isShowing"></child>
   </keep-alive>
   <!-- <child v-show="isShowing"></child> -->
+
+  <p>生命週期流程：</p>
+  <ul>
+    <li>一開始進入元件,開始準備資料並帶入相關事件</li>
+    <li>Created 資料已經建立完成</li>
+    <li>進入判斷,是否有樣板選項 (不影響生命週期順序)</li>
+    <li>BeforeMount 準備把HTML結構放到畫面上,但是還沒掛載上去</li>
+    <li>Mounted 已將元素掛載到畫面上</li>
+    <li>畫面已經準備完成</li>
+    <li>BeforeUpdate / Updated 畫面有變動就會進入另外生命週期,重新渲染畫面使用</li>
+    <li>BeforeUnmount / Unmounted 當元件卸載後進入,處理元件卸載過程</li>
+  </ul>
+
   <p>講解事項：</p>
   <ul>
     <li>Vue 都是元件，元件的生命週期</li>
