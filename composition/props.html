@@ -12,20 +12,20 @@ const { createApp, ref, toRef } = Vue;
 
 const card = {
   template: `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">
-        {{ item.name }}
-      </h5>
-      {{ num }}
-      <br>
-      {{ name }} <input type="text" v-model="name">
-    </div>
-  </div>`,
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ item.name }}
+                </h5>
+                {{ num }}
+                <br>
+                {{ name }} <input type="text" v-model="name">
+              </div>
+            </div>`,
 
   props:['item', 'num'],
 
   setup(props) {
-    console.log(props);
+    console.log("props:", props); // proxy 物件, 可查看 target 內的值
 
     // 第一層維持 proxy 結構(雙向綁定特性)
     const { item, num } = props;

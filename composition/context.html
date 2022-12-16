@@ -8,6 +8,7 @@
   <br>
   <a href="https://cn.vuejs.org/api/composition-api-setup.html#setup-context">2. Setup 上下文 : attrs, slots, emit</a>
 
+  <!-- 前面 card 內層的 push-data, 後面外層所接收方法 getData -->
   <card @push-data="getData"></card>
 
 </div>
@@ -16,15 +17,17 @@ const { createApp, ref } = Vue;
 
 const card = {
   template: `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <button type="text" class="btn btn-primary"
-      @click="pushData">送出資料</button>
-    </div>
-  </div>`,
+              <div class="card-body">
+                <button type="text" class="btn btn-primary"
+                @click="pushData">送出資料</button>
+              </div>
+            </div>`,
+
   setup(props, { attrs, slots, emit }) {
+    // 注意 : 不管有沒有用到 props, 也一定要給他一個名稱, 否則無法正確取的 context
     // setup(props, context) 查看 context 內容
-    // console.log(context); // F12 check context 包含 attrs, emti, slots
-    console.log(emit); // 方法
+    // console.log("context:", context); // F12 check context 包含 attrs, emit, slots
+    console.log("emit:", emit); // 方法
     
     function pushData() {
       // console.log('pushData');

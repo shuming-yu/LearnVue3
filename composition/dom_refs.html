@@ -17,13 +17,13 @@ const { createApp, ref, onMounted } = Vue;
 
 const card = {
   template: `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"></h5>
-    </div>
-  </div>`,
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+              </div>
+            </div>`,
   setup(props, context) {
     function getConsole() {
-      console.log(context);
+      console.log("context:", context);
     }
     
     return {
@@ -36,14 +36,15 @@ const app = createApp({
   components: {
     card,
   },
+  
   setup() {
     const person = ref({
       name: '卡斯伯'
     });
 
     const btn = ref(null);  // btn 對應 ref="btn", 使用 ref 定義資料 輸入 null 即可
-    const card = ref(null); // // card 對應 ref="card", 使用 ref 定義資料 輸入 null 即可
-    console.log(btn.value, card.value);
+    const card = ref(null); // card 對應 ref="card", 使用 ref 定義資料 輸入 null 即可
+    console.log('btn.value:', btn.value, 'card.value:', card.value);
 
     onMounted(() =>{  // onMounted 生命週期取的 DOM 元素
       console.log('btn.value:', btn.value);
