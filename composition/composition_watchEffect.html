@@ -6,17 +6,26 @@
 <div id="app">
   <h3>Watch & watchEffect 差異</h3>
   <ul>
+    <h3>Watch :</h3>
     <li>Watch 監聽特定變數</li>
     <li>Watch 回應前一個修改值</li>
-    <li>watchEffect 使用上比較隨性</li>
+    <li>Watch 無法被停止</li>
+
+    <h3>watchEffect :</h3>
+    <li>watchEffect 使用上比較隨性, 不需要明確定義要監聽的變數</li>
+    <li>watchEffect 預設先執行一次</li>
     <li>watchEffect 可以被停止</li>
   </ul>
 
   {{ watchText }}
-  <input type="text" v-model="productName">
   <br>
-  <input type="text" v-model="product.name">
+  <p>純值:
+  <input type="text" v-model="productName">
+  </p>
 
+  <p>物件: 
+  <input type="text" v-model="product.name">
+  </p>
 </div>
 <script type="module">
 const { createApp, ref, reactive, watchEffect } = Vue;
@@ -39,13 +48,15 @@ const app = createApp({
 
     const watchText = ref('');
 
-    // watchEffect 預設先執行一次
+    // 監聽物件
     const stopwatchEffict = watchEffect(() =>{
-      // console.log('1', productName.value);
-      // console.log('2', product.value.name);
+      // 如有相關程式碼, 即監聽 ( 測試只打開 console.log('純值:', productName.value) )
+      // console.log('純值:', productName.value);
+      // console.log('物件:', product.value.name);
+
       watchText.value = `嬤嬤買了 ${ product.value.name }`;
       count++;
-      console.log(count);
+      console.log("count:", count);
 
       if(count === 10){
         stopwatchEffict();  // 被更新10次時即停止

@@ -28,6 +28,8 @@ const app = createApp({
     //   watchText.value = `輸入的文字僅有 ${newValue.length} 個字，上一次有 ${oldValue.length} 個字`;
     // })
 
+
+
     // 監聽物件
     // # ref, reactive 在此運作相同
     const product = ref({
@@ -40,26 +42,28 @@ const app = createApp({
     });
     const watchText2 = ref('');
 
-    // ref 方式
-    // 監聽深層內容, 需補上 () =>
+    // 1. 物件內單值監聽
+    // 1.1 ref 方式
+    // 監聽深層內容, 需補上 () => 箭頭函式
     // watch(() => product.value.other.name, (newValue, oldValue) =>{
     //   // console.log(newValue, oldValue);
     //   watchText2.value = `輸入的文字僅有 ${newValue.length} 個字，上一次有 ${oldValue.length} 個字`;
     // })
 
-    // reactive 方式, 省去 .value
+    // 1.2 reactive 方式, 省去 .value
     // watch(() => product.other.name, (newValue, oldValue) =>{
     //   // console.log(newValue, oldValue);
     //   watchText2.value = `輸入的文字僅有 ${newValue.length} 個字，上一次有 ${oldValue.length} 個字`;
     // })
     
-    // 深層監聽
+    // 2. 深層監聽
     // watch(product, (newValue, oldValue) =>{
     //   console.log(newValue, oldValue);
-    //   console.log(newValue === oldValue); // 同一物件, 使用其中之一即可
+    //   console.log(newValue === oldValue); // 同一物件, 使用其中之一即可 newValue
     // }, { deep: true })
 
-    // 多值監聽
+    // 3. 多值監聽
+        // 純值, 物件                          newValue                     oldValue
     watch([productName, product], ([productNameVal, productVal],[productNamePre, productPre]) =>{
       console.log('純值',
         'productNameVal:', productNameVal,
