@@ -11,23 +11,28 @@
 </ul>
 <script type="module">
 
+// 範例:
 const render = (prop, data) =>{
   const target = document.querySelector('#app');
   target.innerHTML = `${ prop }: ${ data }`;
 }
-// render('Name', 'Ben');
 
 // #1 Proxy 結構
-// // 控制器，關鍵知識點：監聽
+// 控制器，關鍵知識點：監聽
 const handler = {
   get(obj, prop, value) {
     console.log('get:', obj, prop, value);
-    // return 'Ben';
+
     return obj[prop];
   },
+
   set(obj, prop, newVal) {
+    // obj: proxy物件, prop: 要操作的屬性, newVal: 預期要傳入新的值
     console.log('set:', obj, prop, newVal);
-    obj[prop] = newVal;
+
+    obj[prop] = newVal; // 將值寫入 -> newObj.a = 2
+    
+    // 範例補上 render
     render(prop, obj[prop]);
     return true;  // 操作完畢 (消除錯誤)
   }
@@ -36,10 +41,12 @@ const handler = {
 // 前面是一個"物件"，後面是控制器
 const newObj = new Proxy({ a: 1 }, handler);
 
-newObj.a = 2;
+newObj.a = 2; // 對應 set()
 
-console.log(newObj);
-console.log(newObj.a);  // get return...
+console.log("newObj:", newObj);
+console.log("newObj.a:", newObj.a);  // 對應get() -> get return...
+
+
 
 setTimeout(() => {  // 兩秒後將新增資料重新渲染至畫面
   newObj.a = 'Benjamin';
