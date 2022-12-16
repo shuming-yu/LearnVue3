@@ -10,7 +10,21 @@
     <li>ref 比較好用, 且不會出錯的方法</li>
     <li>reactive 可省去 .value</li>
   </ul>
-  <img src="/composition/ref&reactive.PNG" alt="">
+
+  <ul>
+    <h3>reactive</h3>
+    <li>Handler(控制器) : 監控值的變化 ( 渲染畫面 or 重新調整原始值 )</li>
+    <li>target : 值</li>
+
+    <h3>ref</h3>
+    <li>Handler(控制器) : 監控值的變化 ( 注意: 只有單純的純值時, 控制器是不存在的, 但在原型內有相同機制做運作 )</li>
+    <li>rawValue : 實際上放原始值的地方</li>
+    <li>value : 外層來存取所使用的</li>
+    <li>寫入值, 它會把值再寫一份到 rawValue 裡面</li>
+    <li>讀取值, 它會在 rawValue 裡面把值讀取出來</li>
+    <li>好處 : 它的 value 不一定是 proxy 物件, 一樣可使用純值方式進行存取</li>
+  </ul>
+  <img src="/composition/ref&reactive.PNG" alt="" style="width: 600px;">
 </div>
 <script type="module">
 const { createApp, reactive, ref } = Vue;
@@ -18,26 +32,36 @@ const { createApp, reactive, ref } = Vue;
 const app = createApp({
   setup() {
     // 請都使用 const
-    const person = ref({
+    let person = ref({
       name: '卡斯伯'
     });
-    const person2 = reactive({
+    let person2 = reactive({
       name: '卡斯伯',
     });
 
     // ref 可以用在純值
     // ref 比較好用, 且不會出錯的方法
-    console.log('person', person);
+    console.log('person:', person);
     // 物件, Handler
-    console.log('person2', person2);
+    // reactive 比較純粹的 proxy 物件
+    console.log('person2:', person2);
 
+
+    
     // AJAX
-    // 使用 let person 測試, F12查看呈現 非Proxy物件, 失去雙向綁定特性
-    // const data = {
-    //   name: 'Benjamin',
-    // }
-    // person2 = data;
-    // console.log(person2);
+    // 使用 let person 測試, F12查看呈現 person, person2
+    const data = {
+      name: 'Benjamin',
+    }
+    // 1. ref - 維持雙向綁定特性
+    person.value = data;
+    console.log("person:", person);
+    console.log("person.value:", person.value);
+
+    // 2. reactive - 非 Proxy 物件, 失去雙向綁定特性
+    person2 = data;
+    console.log("person2:", person2);
+
 
     return {
 
